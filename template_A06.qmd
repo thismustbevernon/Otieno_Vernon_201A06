@@ -245,6 +245,14 @@ Create three new data frames by slicing the data by state.
 No need to print any output here.
 
 ```{r}
+colorado_data <- max_temps %>%
+  filter(state=='CO')
+
+ohio_data <- max_temps %>% 
+  filter(state == "OH")
+
+virginia_data <- max_temps %>% 
+  filter(state=='VA')
 
 
 ```
@@ -267,6 +275,18 @@ Example (this is NOT the answer just an example of what goes in the {}):
 Note: This code should still run successfully even if the numbers were to change.
 
 ```{r}
+len <- ncol(colorado_data)
+
+yearly_medians <- apply(colorado_data[, 3:len], 1, median)
+
+min_value <- min(yearly_medians)
+max_value <- max(yearly_medians)
+
+lowest_year <- colorado_data$year[which.min(yearly_medians)]
+
+highest_year <- colorado_data$year[which.max(yearly_medians)]
+
+print(paste0 ("The maximum median annual temperature of ",max_value," occurred in ",highest_year, " and the minimum median annual temperature of ",min_value, " occurred in ", lowest_year, " ."))
 
 
 ```
