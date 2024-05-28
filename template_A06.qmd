@@ -56,7 +56,7 @@ To get full credit for this Question you must:
 
 ## Screenshot/image of RStudio
 
-github_setup.PNG)
+github_setup.PNG),,
 
 :::
 
@@ -102,6 +102,12 @@ Extract the value `8162` (LeBron James points) in 2 different ways:
 - using names
 
 ```{r}
+#using indexing
+player_info[[2]][[4]]
+
+#using names
+
+player_info[["LJ"]][["points"]]
 
 ```
 
@@ -113,6 +119,13 @@ Add a new named element to the end of each player's list called `height`. The he
 Print the `player_info` list to prove you were successful.
 
 ```{r}
+player_info[["MJ"]]$height <- 78
+player_info[["LJ"]]$height <- 81
+player_info[["KB"]]$height <- 78
+player_info[["KA"]]$height <- 86
+player_info[["SO"]]$height <- 85
+
+print(player_info)
 
 ```
 
@@ -132,7 +145,14 @@ Hint: initialize an empty list
 Note: this must still run correctly even if the values were to change or if another player were added to the list or if the player order changed.
 
 ```{r}
+points_list <- list()
 
+for (i in 1 : length(player_info)){
+  points_per_game <- player_info[[i]][["points"]]/ player_info[[i]][["games_played"]]
+  points_list[[player_info[[i]][["name"]]]] <-  points_per_game
+}
+
+points_list
 ```
 
 
@@ -143,6 +163,8 @@ Use the list created in Part c and an appropriate apply function to round each v
 Store the output as a vector and print the results.
 
 ```{r}
+rounded_points <- sapply(points_list, round , digits=2)
+print(rounded_points) 
 
 ```
 
@@ -164,7 +186,20 @@ ie: 91 rounds to 90; 173 rounds to 200; 1450 rounds to 1000
 Hint: use `MARGIN = 1:2` to apply the function to each value instead of only a row/col.
 
 ```{r}
+#use random with -digits
+custom_round <- function(num){
+  
+  if (num < 100){
+    return (round(num, digits = -1))
+  }else if (num >= 100 && num < 1000){
+    return (round(num, digits = -2))
+  }else {
+    return (round(num, digits = -3))
+    }
+  
+}
 
+apply(mat_rand, 1:2, custom_round)
 ```
 
 
@@ -181,6 +216,7 @@ download.file(url = temp_url, destfile = temp_file)
 
 max_temps <- read_tsv("state_max_temps.tsv") |> 
   janitor::clean_names()
+
 ```
 
 ### Part a (2 points)
@@ -188,7 +224,6 @@ max_temps <- read_tsv("state_max_temps.tsv") |>
 Calculate the average temperature for each month across the whole data frame (using the data for all three states together).
 
 ```{r}
-
 ```
 
 
@@ -203,6 +238,7 @@ Create three new data frames by slicing the data by state.
 No need to print any output here.
 
 ```{r}
+
 
 ```
 
@@ -225,6 +261,7 @@ Note: This code should still run successfully even if the numbers were to change
 
 ```{r}
 
+
 ```
 
 
@@ -237,6 +274,8 @@ Example: The number 312 would return 6 (3 + 1 + 2)
 Run your function with 935068.
 
 ```{r}
+
+
 
 ```
 
