@@ -152,7 +152,7 @@ for (i in 1 : length(player_info)){
   points_list[[player_info[[i]][["name"]]]] <-  points_per_game
 }
 
-points_list
+#points_list
 ```
 
 
@@ -301,6 +301,15 @@ Example: The number 312 would return 6 (3 + 1 + 2)
 Run your function with 935068.
 
 ```{r}
+get_sum <- function(number){
+  if (number %/% 10 == 0){
+    return (number)
+  }
+  
+  return  ( number %% 10 + get_sum(number %/% 10))
+}
+
+get_sum(935068)
 
 
 
